@@ -23,5 +23,7 @@ To build the provided docker container run the following command:
 
 To run the docker container with test data run the following comannd
 ```bash
-    docker run -v F:\\GitHub\\Demos\\ElevatedPlusMaze\\Data:/data epm:latest
+    docker run -v $PWD\\ElevatedPlusMaze\\Data:/data epm:latest
 ```
+
+
