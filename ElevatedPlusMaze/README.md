@@ -14,6 +14,9 @@ Plotting of elevated plus maze animal movements.
 Container pipeline
 ----
 
+To use container software please download the udnerlying docker software package 
+[https://www.docker.com/products/docker-desktop/]
+After installation you can directly start building the example container below.
 
 To build the provided docker container run the following command:
 
