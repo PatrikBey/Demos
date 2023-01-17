@@ -24,7 +24,7 @@ email_openminds = mycollection.add_core_contactInformation(email="openminds@ebra
 mycollection.get(person_open).contactInformation = email_openminds
 
 # save your collection
-mycollection.save("./myFirstOpenMINDSMetadataCollection/")
+mycollection.save("/data/myFirstOpenMINDSMetadataCollection/")
 
 # Getting help for properties
 mycollection.help_core_actors_person()

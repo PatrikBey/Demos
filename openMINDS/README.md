@@ -26,7 +26,7 @@ To build the provided docker container run the following command:
 
 To run the docker container with test data run the following comannd
 ```bash
-    docker run -it -v $PWD\\Data:/data openminds:latest bash
+    docker run -it -v $PWD\\openMINDS\\Data:/data openminds:latest bash
 ```
 
 
