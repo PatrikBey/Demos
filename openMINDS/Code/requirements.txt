@@ -1,0 +1,5 @@
+# python packages with versioning
+numpy==1.22.3
+
+# python packages without versioning
+openMINDS
