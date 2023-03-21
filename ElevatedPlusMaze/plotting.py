@@ -36,7 +36,8 @@ def get_animal(_data, _id):
 
 
 # load in test data
-Data = pandas.read_csv('/mnt/f/GitHub/Demos/ElevatedPlusMaze/Data/Data.txt', sep=',')
+Data = pandas.read_csv(os.path.join(os.getcwd(),'Data/Data.txt', sep=','))
+
 
 
 # initialize figure size
@@ -76,7 +77,7 @@ plt.suptitle('Animal movement Elevated Plus Maze')
 plt.tight_layout()
 
 # save plot
-plt.savefig('/mnt/f/GitHub/Demos/ElevatedPlusMaze/Data/EPM-plot-skript.png')
+plt.savefig(os.path.join(os.getcwd(),'/Data/EPM-plot-skript.png'))
 
 
 
