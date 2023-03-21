@@ -1,0 +1,7 @@
+###### Requirements without Version Specifiers ######
+openMINDS
+nibabel
+
+###### Requirements with Version Specifiers ######
+
+
