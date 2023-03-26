@@ -18,7 +18,7 @@ To use container software please download the udnerlying docker software package
 [https://www.docker.com/products/docker-desktop/]
 After installation you can directly start building the example container below.
 
-To build the provided docker container run the following command:
+To build the provided docker container run the following command from inside the EPM directory:
 
 ```bash
     docker build . --force-rm  -t epm:latest -f Docker/Dockerfile
@@ -26,7 +26,7 @@ To build the provided docker container run the following command:
 
 To run the docker container with test data run the following comannd
 ```bash
-    docker run -v $PWD\\ElevatedPlusMaze\\Data:/data epm:latest
+    docker run -v $PWD//Data:/data epm:latest
 ```
 
 

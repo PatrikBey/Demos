@@ -15,15 +15,12 @@ git config --global --add user.email "alan@turing.machine"
 
 # Path=/mnt/h/Research/Demos/DataLad
 Path='/mnt/c/Users/me/Research/Data/Demo'
-
-
-cp /mnt/c/Users/me/GitHub/Demos/ElevatedPlusMaze/Data/Data.txt $Path/Data.txt
-
 cd $Path
 
 datalad create -c text2git DataLad-Demo
 
-mkdir DataLad-Demo/Data
+cd DataLat-Demo
+mkdir Data
 cp /mnt/c/Users/me/GitHub/Demos/ElevatedPlusMaze/Data/Data.txt $Path/DataLad-Demo/Data/Data.txt
 
 datalad save -m "include example data"
@@ -31,16 +28,19 @@ datalad save -m "include example data"
 git log
 
 
-
+# add container for epm from docker hub
 datalad containers-add DataLad-demo --url docker://patrikneuro/epm:demo
-# add container for epm
 
-datalad save -m "include example container"
 
+# run container via singularity
+singularity run --bind $PWD/Data:/data .datalad/environments/DataLad-Demo/image 
+
+
+datalad save -m "singularity plotting"
 
 
 # run container via datalad
-datalad containers-run 
+# datalad containers-run -n DataLad-demo -i $PWD/Data:/data -o . "python /src/RUN.py --filename=$PWD/Data/Data.txt"
 
-datalad containers-run DataLad-demo
+
 

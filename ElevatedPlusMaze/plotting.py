@@ -1,6 +1,20 @@
+# Example script for plotting of animal behaiour in
+# Elevated Plus Maze (EPM) using fake RFID data recorddings.
+
+
+################################
+#       prepare workspace      #
+################################
+
+
+# import packages
 import numpy, matplotlib.pyplot as plt, os, pandas
 
 
+# define global variables
+colors = numpy.arange(40)
+
+# Functions for visualization and data transformations
 def plot_plus_maze():
     '''
     plot borders of pluz maze
@@ -26,17 +40,20 @@ def plot_plus_maze():
     plt.hlines(11,15,20, linewidths = 5, color = 'black' )
 
 
-def get_animal(_data, _id):
-    '''
-    get subset of data for given animal
-    '''
-    import numpy
-    return(_data[numpy.where(_data[:,2]==_id),:2].astype(float).reshape(-1,2))
+# def get_animal(_data, _id):
+#     '''
+#     get subset of data for given animal
+#     '''
+#     import numpy
+#     return(_data[numpy.where(_data[:,2]==_id),:2].astype(float).reshape(-1,2))
 
 
+################################
+#     Perform computations     #
+################################
 
 # load in test data
-Data = pandas.read_csv(os.path.join(os.getcwd(),'Data/Data.txt', sep=','))
+Data = pandas.read_csv(os.path.join(os.getcwd(),'Data/Data.txt'), sep=',')
 
 
 
@@ -47,8 +64,6 @@ plt.figure(figsize=[20,10])
 M1 = Data[Data['ID']=='m1']
 M1.shape
 # (40,3)
-
-colors = numpy.arange(40)
 
 # plot movement of animal M1
 plt.subplot(1,2,1)
@@ -62,7 +77,7 @@ plt.title('M1')
 M2 = Data[Data['ID']=='m2']
 M2.shape
 # (40,3)
-colors = numpy.arange(40)
+
 
 # plot movement of animal M2
 plt.subplot(1,2,2)
@@ -77,7 +92,7 @@ plt.suptitle('Animal movement Elevated Plus Maze')
 plt.tight_layout()
 
 # save plot
-plt.savefig(os.path.join(os.getcwd(),'/Data/EPM-plot-skript.png'))
+plt.savefig(os.path.join(os.getcwd(),'Data/EPM-plot-skript.png'))
 
 
 
