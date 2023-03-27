@@ -20,8 +20,11 @@ cd $Path
 datalad create -c text2git DataLad-Demo
 
 cd DataLat-Demo
+
 mkdir Data
-cp /mnt/c/Users/me/GitHub/Demos/ElevatedPlusMaze/Data/Data.txt $Path/DataLad-Demo/Data/Data.txt
+cd Data
+
+wget https://github.com/PatrikBey/Demos/blob/main/ElevatedPlusMaze/Data/Data.txt 
 
 datalad save -m "include example data"
 
