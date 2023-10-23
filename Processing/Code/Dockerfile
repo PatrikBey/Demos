@@ -20,7 +20,7 @@ ENV FSLDIR="/opt/conda"
 ENV FSLOUTPUTTYPE="NIFTI_GZ"
 
 RUN mkdir "/opt/src"
-COPY Code/src "/opt/src"
+COPY Code "/opt/src"
 ENV SRCDIR="/opt/src"
 # ENTRYPOINT [ "/opt/conda/bin/tini", "--", "/entrypoint" ]
 
