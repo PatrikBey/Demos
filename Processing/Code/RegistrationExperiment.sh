@@ -25,12 +25,18 @@
 #                                           #
 #############################################
 
+############### BUILDING #####################
+# build container via 
+# docker build . -t demos:fsl -f Code/Dockerfile
+# or pull from docker hub
+# docker pull patrikneuro/demos:fsl
+
+############### RUNNING #####################
 # start interactive session of container including Data directory mounted as "/data"
-# docker run -it -v ${PWD}/Data:/data demos:fsl bash
+docker run -it -v ${PWD}/Data:/data demos:fsl bash
 
 # call in single docker call
 # docker run -v ${PWD}/Data:/data -v ${PWD}/Code:/code demos:fsl bash /code/RegistrationExperiment.sh
-
 
 
 #################################################
@@ -54,13 +60,13 @@ OutputImage="/data/In2Ref.nii.gz"
 OutputTransformation="/data/In2Ref.mat"
 
 # get some general information about input images
-echo "FSLINFO for Input varialble: "
+echo "FSLINFO for Input variable: "
 fslinfo "${Input}"
 
-echo "FSLINFO for Reference varialble: "
+echo "FSLINFO for Reference variable: "
 fslinfo "${Reference}"
 
-echo "FSLINFO for Atlas varialble: "
+echo "FSLINFO for Atlas variable: "
 fslinfo "${Atlas}"
 
 
