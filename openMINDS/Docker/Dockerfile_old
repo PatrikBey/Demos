@@ -11,7 +11,7 @@
 
 # RUN pip3 install openMINDS
 
-FROM python:3.11-slim-buster
+FROM python:3.11-slim-buster"
 LABEL author="Patrik Bey; patrik.bey@bih-charite.de"
 
 RUN mkdir -p /openminds/src
@@ -26,5 +26,5 @@ RUN apt-get -qq update && \
 ENV GIT_PYTHON_REFRESH=quiet
 
 
-RUN python3 -c 'import openminds, openminds.latest.core as core'
+RUN python3 -c 'import openMINDS,openMINDS.version_manager ; openMINDS.version_manager.init()'
 

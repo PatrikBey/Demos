@@ -1,6 +1,6 @@
 ###### Requirements without Version Specifiers ######
-openMINDS
-nibabel
+openminds
+numpy
 
 ###### Requirements with Version Specifiers ######
 
