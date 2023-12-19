@@ -46,13 +46,6 @@ def add_entries(_dict):
         collection.add(_dict[k])
 
 
-# Select which version of openMINDS to use
-#openMINDS.version_manager.version_selection('v3')
-
-# initiate the helper class for the dynamic usage of a specific openMINDS version
-#helper = openMINDS.Helper()
-
-
 # initiate the collection into which you will store all metadata instances
 collection = openminds.Collection()
 
@@ -75,25 +68,36 @@ collection.add(BIH)
 collection.add(CHARITE)
 
 check_collection()
+
 # People involved
-
 Actors = dict()
-
 Actors['PB'] = core.Person(given_name = 'Patrik', family_name = 'Bey', affiliations = [core.Affiliation(member_of = BIH),core.Affiliation(member_of = BIH)], digital_identifiers = core.ORCID(identifier='0000-0002-2274-2510'), contact_information = core.ContactInformation(email = 'patrik.bey@bih-charite.de'))
 
 Actors['PR'] = core.Person(given_name = 'Petra', family_name = 'Ritter', affiliations = [core.Affiliation(member_of = BIH),core.Affiliation(member_of = BIH)], digital_identifiers = core.ORCID(identifier='0000-0002-4643-4782'), contact_information = core.ContactInformation(email = 'petra.ritter@bih-charite.de'))
 
 add_entries(Actors)
+
 check_collection()
 
 
 LeAPPPaper = core.DOI(identifier='https://doi.org/10.1101/2023.08.28.555078')
 
+collection.add(LeAPPPaper)
+check_collection()
 # disease
-Stroke = terms.Disease(name='stroke', preferred_ontology_identifier='http://purl.obolibrary.org/obo/DOID_6713')
+Stroke = terms.Disease(name='stroke')
+collection.add(Language)
+############### IRI ISSUE ###################
+#, preferred_ontology_identifier=(iri='http://purl.obolibrary.org/obo/DOID_6713'))
+############### IRI ISSUE ###################
+collection.add(Stroke)
+check_collection()
 
 #----------------------language---------------------#
 Language = terms.Language(name='English')
+
+collection.add(Language)
+check_collection()
 
 #              PRODUCT OBJECTS              #
 
@@ -103,18 +107,33 @@ FullName = 'Lesion Aware automated Processing Pipeline (LeAPP)'
 
 ShortName = 'LeAPP'
 
-HomePage = core.WebResource(iri='https://www.github.com/BrainModes/leapp')
+# collection.add(Description)
+# collection.add(FullName)
+# collection.add(ShortName)
+# check_collection()
 
-FullDoc = HomePage
+
+
+############### IRI ISSUE ###################
+# HomePage = core.WebResource(iri='https://www.github.com/BrainModes/leapp')
+# collection.add(HomePage)
+# check_collection()
+############### IRI ISSUE ###################
+
+FullDoc = 'https://www.github.com/BrainModes/leapp'
 
 
 #       LICENSING      #
-License=core.License(short_name='EUPL-1.2', 
-                    full_name='European Union Public License 1.2', 
-                    legal_code='https://joinup.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_en.pdf')
-#       ACCESS      #
+# License=core.License(short_name='EUPL-1.2', 
+#                     full_name='European Union Public License 1.2', 
+#                     legal_code="https://joinup.ec.europa.eu/sites/default/files/custom-page/attachment/eupl_v1.2_en.pdf")
+# #       ACCESS      #
+# collection.add(License)
+# check_collection()
 
 access=terms.ProductAccessibility(name='free access')
+collection.add(access)
+check_collection()
 
 #              SOFTWARE OBJECTS              #
 
@@ -127,11 +146,17 @@ Techniques['dwi']= terms.Technique(name='diffusion-weighted imaging')
 Techniques['smri']= terms.Technique(name='structural neuroimaging')
 Techniques['tract']= terms.Technique(name='tractography')
 Techniques['parc']= terms.Technique(name='anatomical parcellation technique')
-
+# create list for use later on
+tech=[Techniques[k] for k in Techniques.keys() ]
+add_entries(Techniques)
+check_collection()
 
 #----------------------category---------------------#
 
 Category = terms.SoftwareApplicationCategory(name='application',definition='The provided application is a fully self contained docker container image.')
+
+collection.add(Category)
+check_collection()
 
 #----------------------devices----------------------#
 
@@ -139,6 +164,10 @@ Devices = dict()
 Devices['1'] = terms.OperatingDevice(name='desktop')
 Devices['2'] = terms.OperatingDevice(name='high-performance computer')
 Devices['3'] = terms.OperatingDevice(name='server')
+
+add_entries(Devices)
+check_collection()
+
 
 #----------------------features---------------------#
 Features = dict()
@@ -148,19 +177,27 @@ Features['3'] = terms.SoftwareFeature(name='timeSeriesDataTypes')
 Features['4'] = terms.SoftwareFeature(name='statisticalDataTypes')
 Features['5'] = terms.SoftwareFeature(name='simulation')
 
+add_entries(Features)
+check_collection()
+
 #-------------------------OS------------------------#
 OS =  terms.OperatingSystem(name='platform independent')
+collection.add(OS)
+check_collection()
+
 
 #---------------programming language----------------#
 
 ProgLang = dict()
 ProgLang['1'] = terms.ProgrammingLanguage(name = 'Python')
 ProgLang['2'] = terms.ProgrammingLanguage(name = 'Bash')
-
+add_entries(ProgLang)
+check_collection()
 
 
 VersID = '1.0'
 
+ReleaseDate="1900-01-01"
 #            VERSION INNOVATION            #
 
 VersInno = 'This is the first version of this research product.'
@@ -176,22 +213,27 @@ SWVersion = core.SoftwareVersion(
     application_categories=Category,
     devices=[ Devices[f] for f in Devices.keys() ],
     features = [ Features[f] for f in Features.keys() ],
-    full_documentation=FullDoc, 
+    full_documentation=LeAPPPaper, 
     languages=Language,
-    licenses=License,
     operating_systems=OS,
     programming_languages = [ProgLang[l] for l in ProgLang.keys()],
-    release_date='TBD',
+    release_date=ReleaseDate,
     short_name=ShortName,
     version_identifier=VersID,
     version_innovation=VersInno,
     custodians = Actors['PR'],
     developers = Actors['PB'],
     full_name = FullName,
-    keywords = [ Stroke, Features['1'], [Techniques[k] for k in Techniques.keys() ], Category]
+    keywords = tuple([Stroke, Features['1'], Category, *tech])
 )
-collection.add(SWVersion)
 
+# tuple([Stroke, Features['1'], Category,Techniques['mri'],Techniques['fmri'],Techniques['dwi'],Techniques['smri'],Techniques['tract'],Techniques['parc'] ])
+
+
+# full_documentation=FullDoc, 
+# licenses=License,
+collection.add(SWVersion)
+check_collection()
 
 #################################################
 #                                               #

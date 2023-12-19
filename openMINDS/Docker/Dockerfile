@@ -26,5 +26,5 @@ RUN apt-get -qq update && \
 ENV GIT_PYTHON_REFRESH=quiet
 
 
-RUN python3 -c 'import openminds, openminds.latest.core as core'
+RUN python3 -c 'import openminds, os, numpy, openminds.latest.core as core, openminds.latest.controlled_terms as terms'
 
